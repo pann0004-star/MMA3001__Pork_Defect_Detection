@@ -218,3 +218,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# raw data (too large, and not ours to publish)
+*.csv
+*.xlsx
+data/
