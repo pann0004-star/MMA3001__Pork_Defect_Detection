@@ -58,14 +58,6 @@ def test_summarise_metrics():
     assert s["per_class"]["c"]["f1"] == 0.0     # guarded against divide by zero
 
 
-def test_resume_without_previous_run(dataset, monkeypatch, tmp_path):
-    import sys, types
-    monkeypatch.setitem(sys.modules, "ultralytics", types.SimpleNamespace(YOLO=None))
-    monkeypatch.setattr(train, "RUNS_DIR", tmp_path / "runs")
-    with pytest.raises(FileNotFoundError):
-        train.train_and_evaluate(dataset, "missing_run", resume=True)
-
-
 def test_read_run_info(tmp_path):
     run = tmp_path / "run"
     run.mkdir()
@@ -88,3 +80,4 @@ def test_evaluate_run_without_weights(dataset, monkeypatch, tmp_path):
     monkeypatch.setitem(sys.modules, "ultralytics", types.SimpleNamespace(YOLO=None))
     with pytest.raises(FileNotFoundError):
         train.evaluate_run(dataset, "x", run_dir=tmp_path / "nothing")
+        

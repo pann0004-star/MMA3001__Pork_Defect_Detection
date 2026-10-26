@@ -115,12 +115,11 @@ def train_and_evaluate(
     model: str = "yolov8n.pt",
     epochs: int = 50,
     imgsz: int = 640,
-    batch: int = 16,
+    batch: int = 8,
     patience: int = 15,
     seed: int = 0,
     device: str = "0",
     workers: int = 2,
-    resume: bool = False,
 ) -> dict:
     """Train one model and score it on the validation and test splits.
 
@@ -136,8 +135,6 @@ def train_and_evaluate(
         device: ``"0"`` for the first GPU, ``"cpu"`` for the processor.
         workers: Background processes loading images. Low values are more
             stable on Windows laptops.
-        resume: Continue an interrupted run from ``runs/<name>/weights/last.pt``
-            with its original settings, instead of starting again.
 
     Returns:
         The results dictionary that is also saved to ``results/<name>.json``.
@@ -147,17 +144,13 @@ def train_and_evaluate(
     yaml_path = prepare_data_yaml(data_dir)
     project = str(RUNS_DIR.resolve())
 
-    if resume:
-        last = RUNS_DIR / name / "weights" / "last.pt"
-        if not last.exists():
-            raise FileNotFoundError(f"Nothing to resume, {last} does not exist")
-        trainer_model = YOLO(str(last))
-        trainer_model.train(resume=True, project=project, name=name, exist_ok=True)
-    else:
-        trainer_model = YOLO(model)
-        trainer_model.train(data=str(yaml_path), epochs=epochs, imgsz=imgsz, batch=batch,
-                            patience=patience, seed=seed, deterministic=True, device=device,
-                            workers=workers, project=project, name=name, exist_ok=True)
+    # Note: Ultralytics' resume option was tested and found unreliable here (it
+    # restarted from default settings and overwrote the run), so it is not
+    # offered. An interrupted run is scored with --evaluate-only instead.
+    trainer_model = YOLO(model)
+    trainer_model.train(data=str(yaml_path), epochs=epochs, imgsz=imgsz, batch=batch,
+                        patience=patience, seed=seed, deterministic=True, device=device,
+                        workers=workers, project=project, name=name, exist_ok=True)
 
     run_dir = Path(trainer_model.trainer.save_dir)
     expected = RUNS_DIR.resolve() / name
@@ -246,15 +239,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--model", default="yolov8n.pt", help="starting weights")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--imgsz", type=int, default=640)
-    parser.add_argument("--batch", type=int, default=16)
+    parser.add_argument("--batch", type=int, default=8)
     parser.add_argument("--patience", type=int, default=15)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--device", default="0", help='"0" for GPU, "cpu" for processor')
     parser.add_argument("--workers", type=int, default=2, help="image loading processes")
     parser.add_argument("--evaluate-only", action="store_true",
                         help="skip training, score runs/<name>/weights/best.pt")
-    parser.add_argument("--resume", action="store_true",
-                        help="continue an interrupted run with the same --name")
     args = parser.parse_args(argv)
 
     if args.evaluate_only:
@@ -264,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     results = train_and_evaluate(args.data, args.name, args.model, args.epochs, args.imgsz,
                                  args.batch, args.patience, args.seed, args.device,
-                                 args.workers, args.resume)
+                                 args.workers)
     print_results(results)
     print(f"\nSaved to {RESULTS_DIR / (args.name + '.json')}")
     return 0
