@@ -1,0 +1,80 @@
+{
+  "name": "B_blocked_split",
+  "split": "test",
+  "conf": 0.25,
+  "true_boxes": {
+    "loose-meat": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "missed": 5
+    },
+    "packaging-error": {
+      "hit": 37,
+      "wrong_class": 0,
+      "poor_box": 10,
+      "missed": 24
+    },
+    "twisted-meat": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "missed": 4
+    },
+    "unsealed": {
+      "hit": 75,
+      "wrong_class": 0,
+      "poor_box": 2,
+      "missed": 4
+    },
+    "wrinkle": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "missed": 1
+    }
+  },
+  "predictions": {
+    "loose-meat": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "background": 0
+    },
+    "packaging-error": {
+      "hit": 37,
+      "wrong_class": 0,
+      "poor_box": 16,
+      "background": 16
+    },
+    "twisted-meat": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "background": 0
+    },
+    "unsealed": {
+      "hit": 75,
+      "wrong_class": 0,
+      "poor_box": 6,
+      "background": 12
+    },
+    "wrinkle": {
+      "hit": 0,
+      "wrong_class": 0,
+      "poor_box": 0,
+      "background": 0
+    }
+  },
+  "confusion": {},
+  "edge": {
+    "boxes": 108,
+    "failed": 26,
+    "fail_rate": 0.24074074074074073
+  },
+  "inside": {
+    "boxes": 54,
+    "failed": 24,
+    "fail_rate": 0.4444444444444444
+  }
+}
