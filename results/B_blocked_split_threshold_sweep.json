@@ -1,0 +1,345 @@
+{
+  "name": "B_blocked_split",
+  "chosen_threshold": 0.25,
+  "selection": "max F2 on validation",
+  "validation": [
+    {
+      "threshold": 0.05,
+      "precision": 0.31085043988269795,
+      "recall": 0.803030303030303,
+      "f1": 0.44820295983086683,
+      "f2": 0.6098964326812428,
+      "tray_recall": 0.9669421487603306,
+      "tray_false_alarm": 0.6176470588235294,
+      "class_recall": {
+        "loose-meat": 0.3333333333333333,
+        "packaging-error": 0.8024691358024691,
+        "twisted-meat": 0.25,
+        "unsealed": 0.9069767441860465,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.1,
+      "precision": 0.4089068825910931,
+      "recall": 0.7651515151515151,
+      "f1": 0.5329815303430079,
+      "f2": 0.6516129032258065,
+      "tray_recall": 0.9504132231404959,
+      "tray_false_alarm": 0.4117647058823529,
+      "class_recall": {
+        "loose-meat": 0.3333333333333333,
+        "packaging-error": 0.7654320987654321,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8837209302325582,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.15,
+      "precision": 0.4895833333333333,
+      "recall": 0.7121212121212122,
+      "f1": 0.5802469135802469,
+      "f2": 0.6527777777777778,
+      "tray_recall": 0.9173553719008265,
+      "tray_false_alarm": 0.2647058823529412,
+      "class_recall": {
+        "loose-meat": 0.3333333333333333,
+        "packaging-error": 0.6790123456790124,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8837209302325582,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.2,
+      "precision": 0.5625,
+      "recall": 0.6818181818181818,
+      "f1": 0.6164383561643836,
+      "f2": 0.6540697674418604,
+      "tray_recall": 0.9008264462809917,
+      "tray_false_alarm": 0.23529411764705882,
+      "class_recall": {
+        "loose-meat": 0.3333333333333333,
+        "packaging-error": 0.6296296296296297,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8837209302325582,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.25,
+      "precision": 0.6444444444444445,
+      "recall": 0.6590909090909091,
+      "f1": 0.651685393258427,
+      "f2": 0.6561085972850678,
+      "tray_recall": 0.859504132231405,
+      "tray_false_alarm": 0.20588235294117646,
+      "class_recall": {
+        "loose-meat": 0.3333333333333333,
+        "packaging-error": 0.5925925925925926,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8837209302325582,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.3,
+      "precision": 0.7068965517241379,
+      "recall": 0.6212121212121212,
+      "f1": 0.6612903225806452,
+      "f2": 0.6366459627329193,
+      "tray_recall": 0.8099173553719008,
+      "tray_false_alarm": 0.17647058823529413,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.5432098765432098,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8837209302325582,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.35,
+      "precision": 0.7475728155339806,
+      "recall": 0.5833333333333334,
+      "f1": 0.6553191489361702,
+      "f2": 0.6101426307448494,
+      "tray_recall": 0.7603305785123967,
+      "tray_false_alarm": 0.11764705882352941,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.49382716049382713,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8604651162790697,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.8064516129032258,
+      "recall": 0.5681818181818182,
+      "f1": 0.6666666666666667,
+      "f2": 0.603864734299517,
+      "tray_recall": 0.7107438016528925,
+      "tray_false_alarm": 0.08823529411764706,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.4691358024691358,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8604651162790697,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.45,
+      "precision": 0.8470588235294118,
+      "recall": 0.5454545454545454,
+      "f1": 0.6635944700460829,
+      "f2": 0.5872756933115824,
+      "tray_recall": 0.6694214876033058,
+      "tray_false_alarm": 0.058823529411764705,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.4444444444444444,
+        "twisted-meat": 0.0,
+        "unsealed": 0.8372093023255814,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.881578947368421,
+      "recall": 0.5075757575757576,
+      "f1": 0.6442307692307692,
+      "f2": 0.554635761589404,
+      "tray_recall": 0.6115702479338843,
+      "tray_false_alarm": 0.029411764705882353,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.3950617283950617,
+        "twisted-meat": 0.0,
+        "unsealed": 0.813953488372093,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.55,
+      "precision": 0.8783783783783784,
+      "recall": 0.49242424242424243,
+      "f1": 0.6310679611650486,
+      "f2": 0.5398671096345514,
+      "tray_recall": 0.5950413223140496,
+      "tray_false_alarm": 0.029411764705882353,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.38271604938271603,
+        "twisted-meat": 0.0,
+        "unsealed": 0.7906976744186046,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.8695652173913043,
+      "recall": 0.45454545454545453,
+      "f1": 0.5970149253731344,
+      "f2": 0.5025125628140703,
+      "tray_recall": 0.5537190082644629,
+      "tray_false_alarm": 0.029411764705882353,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.32098765432098764,
+        "twisted-meat": 0.0,
+        "unsealed": 0.7906976744186046,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.65,
+      "precision": 0.9,
+      "recall": 0.4090909090909091,
+      "f1": 0.5625000000000001,
+      "f2": 0.4591836734693878,
+      "tray_recall": 0.48760330578512395,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.25925925925925924,
+        "twisted-meat": 0.0,
+        "unsealed": 0.7674418604651163,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.8909090909090909,
+      "recall": 0.3712121212121212,
+      "f1": 0.5240641711229946,
+      "f2": 0.4202401372212693,
+      "tray_recall": 0.4462809917355372,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.2222222222222222,
+        "twisted-meat": 0.0,
+        "unsealed": 0.7209302325581395,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.75,
+      "precision": 0.9375,
+      "recall": 0.3409090909090909,
+      "f1": 0.5,
+      "f2": 0.390625,
+      "tray_recall": 0.39669421487603307,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.18518518518518517,
+        "twisted-meat": 0.0,
+        "unsealed": 0.6976744186046512,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.8,
+      "precision": 0.9696969696969697,
+      "recall": 0.24242424242424243,
+      "f1": 0.38787878787878793,
+      "f2": 0.28520499108734404,
+      "tray_recall": 0.2727272727272727,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.04938271604938271,
+        "twisted-meat": 0.0,
+        "unsealed": 0.6511627906976745,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.85,
+      "precision": 1.0,
+      "recall": 0.06060606060606061,
+      "f1": 0.1142857142857143,
+      "f2": 0.0746268656716418,
+      "tray_recall": 0.06611570247933884,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.024691358024691357,
+        "twisted-meat": 0.0,
+        "unsealed": 0.13953488372093023,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.9,
+      "precision": 1.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f2": 0.0,
+      "tray_recall": 0.0,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.0,
+        "twisted-meat": 0.0,
+        "unsealed": 0.0,
+        "wrinkle": 0.0
+      }
+    },
+    {
+      "threshold": 0.95,
+      "precision": 1.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f2": 0.0,
+      "tray_recall": 0.0,
+      "tray_false_alarm": 0.0,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.0,
+        "twisted-meat": 0.0,
+        "unsealed": 0.0,
+        "wrinkle": 0.0
+      }
+    }
+  ],
+  "test": {
+    "default 0.25": {
+      "threshold": 0.25,
+      "precision": 0.691358024691358,
+      "recall": 0.691358024691358,
+      "f1": 0.691358024691358,
+      "f2": 0.691358024691358,
+      "tray_recall": 0.8881118881118881,
+      "tray_false_alarm": 0.3181818181818182,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.5211267605633803,
+        "twisted-meat": 0.0,
+        "unsealed": 0.9259259259259259,
+        "wrinkle": 0.0
+      }
+    },
+    "chosen 0.25": {
+      "threshold": 0.25,
+      "precision": 0.691358024691358,
+      "recall": 0.691358024691358,
+      "f1": 0.691358024691358,
+      "f2": 0.691358024691358,
+      "tray_recall": 0.8881118881118881,
+      "tray_false_alarm": 0.3181818181818182,
+      "class_recall": {
+        "loose-meat": 0.0,
+        "packaging-error": 0.5211267605633803,
+        "twisted-meat": 0.0,
+        "unsealed": 0.9259259259259259,
+        "wrinkle": 0.0
+      }
+    }
+  }
+}
