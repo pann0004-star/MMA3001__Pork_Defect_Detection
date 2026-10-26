@@ -223,3 +223,6 @@ __marimo__/
 *.csv
 *.xlsx
 data/
+
+runs/
+*.pt
