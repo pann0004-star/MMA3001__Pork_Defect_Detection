@@ -13,6 +13,7 @@ Run from the repo root, for example:
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 from pathlib import Path
 
@@ -156,11 +157,20 @@ def train_and_evaluate(
     expected = RUNS_DIR.resolve() / name
     if run_dir.resolve() != expected:
         print(f"WARNING: training saved to {run_dir}, expected {expected}")
-    return evaluate_run(data_dir, name, run_dir=run_dir, device=device)
+    # Free the training process's memory before scoring. Without this, the
+    # scoring step could run out of RAM on a 4 GB GPU laptop.
+    del trainer_model
+    gc.collect()
+    try:
+        import torch
+        torch.cuda.empty_cache()
+    except ImportError:
+        pass
+    return evaluate_run(data_dir, name, run_dir=run_dir, device=device, workers=workers)
 
 
 def evaluate_run(data_dir: Path, name: str, run_dir: Path | None = None,
-                 device: str = "0") -> dict:
+                 device: str = "0", workers: int = 2) -> dict:
     """Score a finished (or interrupted) run's best weights on valid and test.
 
     Settings and progress are read from the run folder, so the saved results
@@ -171,6 +181,7 @@ def evaluate_run(data_dir: Path, name: str, run_dir: Path | None = None,
         name: Run name, used for the results file.
         run_dir: Run folder; defaults to ``runs/<name>``.
         device: ``"0"`` for the first GPU, ``"cpu"`` for the processor.
+        workers: Background processes loading images during scoring.
 
     Returns:
         The results dictionary that is also saved to ``results/<name>.json``.
@@ -196,8 +207,8 @@ def evaluate_run(data_dir: Path, name: str, run_dir: Path | None = None,
     results = {"name": name, "data": str(Path(data_dir)), **info, "weights": str(weights)}
     for split in ("val", "test"):
         metrics = best.val(data=str(yaml_path), split=split, imgsz=imgsz, batch=batch,
-                           device=device, project=project, name=f"{name}_{split}",
-                           exist_ok=True)
+                           device=device, workers=workers, project=project,
+                           name=f"{name}_{split}", exist_ok=True)
         results[split] = summarise_metrics(metrics, names)
 
     RESULTS_DIR.mkdir(exist_ok=True)
@@ -249,7 +260,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.evaluate_only:
-        results = evaluate_run(args.data, args.name, device=args.device)
+        results = evaluate_run(args.data, args.name, device=args.device, workers=args.workers)
         print_results(results)
         print(f"\nSaved to {RESULTS_DIR / (args.name + '.json')}")
         return 0

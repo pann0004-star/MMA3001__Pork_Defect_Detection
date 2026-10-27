@@ -12,7 +12,7 @@
   },
   "epochs_run": 40,
   "train_minutes": 55.6,
-  "weights": "C:\\MMA3001-project\\MMA3001__Pork_Defect_Detection\\runs\\B_blocked_split\\weights\\best.pt",
+  "weights": "runs\\B_blocked_split\\weights\\best.pt",
   "val": {
     "precision": 0.8007803869886828,
     "recall": 0.35974734424346827,

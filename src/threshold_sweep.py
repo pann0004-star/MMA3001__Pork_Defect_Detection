@@ -59,14 +59,14 @@ def iou(box: np.ndarray, boxes: np.ndarray) -> np.ndarray:
     return np.where(union > 0, inter / np.where(union > 0, union, 1), 0.0)
 
 
-def match_image(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr: float = 0.5):
-    """Mark each prediction in one image as a true or false positive.
+def greedy_match(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr: float = 0.5):
+    """Match predictions to ground truth boxes in one image.
 
     Predictions are matched greedily from most to least confident. A
-    prediction is a true positive if it overlaps an unmatched ground truth
-    box of the same class with IoU of at least ``iou_thr``. Because higher
-    confidence predictions claim boxes first, raising the threshold later
-    never changes which of the remaining predictions are true positives.
+    prediction claims the unmatched ground truth box of the same class that
+    it overlaps most, provided the IoU is at least ``iou_thr``. Because
+    higher confidence predictions claim boxes first, raising the threshold
+    later never changes which of the remaining predictions are matched.
 
     Args:
         pred_cls, pred_conf, pred_boxes: Predicted classes, confidences and
@@ -75,12 +75,13 @@ def match_image(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr: floa
         iou_thr: Minimum overlap to count as a match.
 
     Returns:
-        Boolean array, True where the prediction is a true positive.
+        Integer array with, for each prediction, the index of the ground
+        truth box it matched, or -1 if it matched nothing.
     """
     pred_cls = np.asarray(pred_cls, dtype=int)
     gt_cls = np.asarray(gt_cls, dtype=int)
     gt_boxes = np.asarray(gt_boxes, dtype=float).reshape(-1, 4)
-    is_tp = np.zeros(len(pred_cls), dtype=bool)
+    matched = np.full(len(pred_cls), -1, dtype=int)
     taken = np.zeros(len(gt_cls), dtype=bool)
     for i in np.argsort(-np.asarray(pred_conf, dtype=float), kind="stable"):
         candidates = (gt_cls == pred_cls[i]) & ~taken
@@ -89,9 +90,20 @@ def match_image(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr: floa
         overlaps = np.where(candidates, iou(np.asarray(pred_boxes[i]), gt_boxes), -1.0)
         best = int(np.argmax(overlaps))
         if overlaps[best] >= iou_thr:
-            is_tp[i] = True
+            matched[i] = best
             taken[best] = True
-    return is_tp
+    return matched
+
+
+def match_image(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr: float = 0.5):
+    """Mark each prediction in one image as a true or false positive.
+
+    See ``greedy_match`` for the matching rule.
+
+    Returns:
+        Boolean array, True where the prediction is a true positive.
+    """
+    return greedy_match(pred_cls, pred_conf, pred_boxes, gt_cls, gt_boxes, iou_thr) >= 0
 
 
 def sweep(images: list[dict], n_classes: int, thresholds=THRESHOLDS) -> dict:
